@@ -73,4 +73,19 @@ public class MyBatisTest {
 
     }
 
+    @Test
+    public void testQueryAllUsers() throws IOException {
+        InputStream inputStream = Resources.getResourceAsStream("mybatis-config.xml");
+        SqlSessionFactoryBuilder sqlSessionFactoryBuilder = new SqlSessionFactoryBuilder();
+        SqlSessionFactory build = sqlSessionFactoryBuilder.build(inputStream);
+        SqlSession sqlSession = build.openSession(true);
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        //使用数据流输出每个元素
+        mapper.getAllUser().stream().forEach(System.out::println);
+        //输出每个的年龄
+        mapper.getAllUser().stream().forEach(user -> System.out.println(user.getAge()));
+        mapper.getAllUser().stream().forEach(user -> System.out.println(user));
+
+    }
+
 }

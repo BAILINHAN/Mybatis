@@ -37,7 +37,7 @@
         resultType:设置默认的映射关系
         resultMap:设置自定义的映射关系
      -->
-    <select id="getUserById" resultType="com.solo.mybatis.pojo.User">
+    <select id="getUserById" resultType="User">
         SELECT
         *
         FROM
@@ -47,7 +47,7 @@
     </select>
 
     <!-- getAllUser() -->
-    <select id="getAllUser" resultType="com.solo.mybatis.pojo.User">
+    <select id="getAllUser" resultType="User">
         SELECT
         *
         FROM
