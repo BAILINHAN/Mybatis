@@ -3,7 +3,6 @@ package com.solo.mybatis.test;
 import com.solo.mybatis.mapper.ParameterMapper;
 import com.solo.mybatis.pojo.User;
 import com.solo.mybatis.utils.SqlSessionUtils;
-import org.apache.ibatis.annotations.One;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
@@ -28,6 +27,10 @@ public class ParameterMapperTest {
      * 3、若mapper接口方法的参数有多个时，可以手动将这些参数放在一个map中存储
      * 4、若mapper接口方法的参数是一个实体类类型的参数，只需通过#{}或${}以属性值的方式
      * 访问属性即可，仍然需要注意使用'${}'
+     * 5、使用@Param注解命名参数
+     * 此时MyBatis会将这些参数放在一个map集合中，以两种方式进行存储
+     * a>以@Param注解的的值为键，以参数为值
+     * b>以param1, param2....为键，以参数为值
      */
     @Test
     public void testSelectAllUser(){
@@ -91,6 +94,17 @@ public class ParameterMapperTest {
                 .build());
 
         System.out.println(result == 1 ? true : false);
+
+    }
+
+    @Test
+    public void testLoginByParam(){
+
+        SqlSession sqlSession = SqlSessionUtils.getSqlSession();
+        ParameterMapper mapper = sqlSession.getMapper(ParameterMapper.class);
+        User checkResult = mapper.checkLoginByParam("张三", "123456");
+
+        System.out.println(checkResult);
 
     }
 

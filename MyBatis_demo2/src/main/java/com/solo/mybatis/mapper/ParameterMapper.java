@@ -43,4 +43,9 @@ public interface ParameterMapper {
      */
     int insertUser(User user);
 
+    /**
+     * 验证登录(使用@Param注解)
+     */
+    User checkLoginByParam(@Param("userName") String userName, @Param("passWord") String passWord);
+
 }

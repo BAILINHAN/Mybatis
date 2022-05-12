@@ -51,4 +51,15 @@
         (null, #{username}, #{password}, #{age}, #{sex}, #{email})
     </insert>
 
+    <select id="checkLoginByParam" resultType="User">
+        SELECT
+        *
+        FROM
+        t_user
+        WHERE
+        username = #{userName}
+        AND
+        password = #{passWord}
+    </select>
+
 </mapper>
