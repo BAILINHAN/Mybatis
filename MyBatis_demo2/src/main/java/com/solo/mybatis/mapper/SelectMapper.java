@@ -1,6 +1,7 @@
 package com.solo.mybatis.mapper;
 
 import com.solo.mybatis.pojo.User;
+import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -27,5 +28,17 @@ public interface SelectMapper {
      * 根据id查询用户信息为一个map集合
      */
     Map<String, User> getUserByIdToMap(@Param("id") Integer id);
+
+    /**
+     * 查询所有用户的Map集合
+     */
+    List<Map<String, User>> getAllUserToMap();
+
+    /**
+     * 使用id作为Map的键
+     * @return
+     */
+    @MapKey("id")
+    Map<String, User> getAllUserToMapWithMapKey();
 
 }

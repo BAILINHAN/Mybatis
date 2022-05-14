@@ -36,4 +36,18 @@
         id = #{id}
     </select>
 
+    <select id="getAllUserToMap" resultType="java.util.Map">
+        SELECT
+        *
+        FROM
+        t_user
+    </select>
+
+    <select id="getAllUserToMapWithMapKey" resultType="java.util.Map">
+        SELECT
+        *
+        FROM
+        t_user
+    </select>
+
 </mapper>
