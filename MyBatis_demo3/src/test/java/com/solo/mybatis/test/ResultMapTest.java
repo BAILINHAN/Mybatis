@@ -1,3 +1,5 @@
+package com.solo.mybatis.test;
+
 import com.solo.mybatis.mapper.DeptMapper;
 import com.solo.mybatis.mapper.EmpMapper;
 import com.solo.mybatis.pojo.Dept;
