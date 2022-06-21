@@ -48,6 +48,10 @@
         ${tableName}
     </select>
 
+    <!--
+        useGeneratedKeys:设置当前标签中使用了自增的Id或者主键
+        keyProperty:将自增的主键的值赋值给传输到映射文件中参数的某个属性
+    -->
     <insert id="insertUser" parameterType="User" useGeneratedKeys="true" keyProperty="id">
         INSERT
         INTO

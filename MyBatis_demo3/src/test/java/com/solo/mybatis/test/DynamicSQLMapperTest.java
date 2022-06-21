@@ -6,6 +6,7 @@ import com.solo.mybatis.utils.SqlSessionUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class DynamicSQLMapperTest {
@@ -22,7 +23,58 @@ public class DynamicSQLMapperTest {
      * suffixOverrides|prefixOverrides: 将trim标签中内容前面或后面去掉指定内容
      * 若标签中没有内容时，trim标签也没有任何效果
      * 4.choose、when、otherwise, 相当于if....else if....else
+     * when至少要有一个，otherwise最多只能有一个
+     * 5.foreach
+     * collection:设置需要循环的数组或集合
+     * item:表示数组或集合中的每一个数据
+     * separator:循环体之间的分隔符
+     * open:foreach标签所循环的所有内容的开始符
+     * close:foreach标签所循环的所有内容的结束符
+     * 6.sql标签
+     * 设置SQL片段：<sql id="empColumns">eid,emp_name,age,sex,email</sql>
+     * 引用SQL片段：<include refid=empColumns></include>
      */
+
+    @Test
+    public void testInsertMoreByList(){
+
+        SqlSession sqlSession = SqlSessionUtils.getSqlSession();
+        DynamicSQLMapper mapper = sqlSession.getMapper(DynamicSQLMapper.class);
+        int count = mapper.insertMoreByList(
+                Arrays.asList(
+                    new Emp(null, "a", 23, "男", "123@qq.com"),
+                    new Emp(null, "a1", 23, "男", "123@qq.com"),
+                    new Emp(null, "a2", 23, "男", "123@qq.com"))
+
+                );
+
+        System.out.println(count);
+
+    }
+
+    @Test
+    public void testDeleteMore(){
+
+        SqlSession sqlSession = SqlSessionUtils.getSqlSession();
+        DynamicSQLMapper mapper = sqlSession.getMapper(DynamicSQLMapper.class);
+        int count = mapper.deleteMoreByArray(new Integer[]{6,7,8});
+
+        System.out.println(count);
+
+    }
+
+    @Test
+    public void testGetEmpByChoose(){
+
+        SqlSession sqlSession = SqlSessionUtils.getSqlSession();
+        DynamicSQLMapper mapper = sqlSession.getMapper(DynamicSQLMapper.class);
+
+//        List<Emp> empByChoose = mapper.getEmpByChoose(new Emp(null, "张三", null, null, null));
+        List<Emp> empByChoose = mapper.getEmpByChoose(new Emp());
+
+        System.out.println(empByChoose);
+    }
+
     @Test
     public void testGetEmpByCondition(){
 

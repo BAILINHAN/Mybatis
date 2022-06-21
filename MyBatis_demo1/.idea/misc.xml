@@ -7,7 +7,13 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/../MyBatis_demo2/pom.xml" />
         <option value="$PROJECT_DIR$/../MyBatis_demo3/pom.xml" />
+        <option value="$PROJECT_DIR$/../Mybatis_MBG/pom.xml" />
       </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/../MyBatis_demo3/MyBatis_MBG/pom.xml" />
+      </set>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_14" default="true" project-jdk-name="14" project-jdk-type="JavaSDK">

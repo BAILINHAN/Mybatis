@@ -4,6 +4,70 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.solo.mybatis.mapper.DynamicSQLMapper">
 
+    <insert id="insertMoreByList">
+        INSERT
+        INTO
+        t_emp
+        VALUES
+        <foreach collection="emps" item="emp" separator=",">
+            (null, #{emp.empName}, #{emp.age}, #{emp.sex}, #{emp.email}, null)
+        </foreach>
+    </insert>
+
+    <delete id="deleteMoreByArray">
+        DELETE
+        FROM
+        t_emp
+        WHERE
+        <foreach collection="eids" item="eid" separator="or">
+            eid = #{eid}
+        </foreach>
+
+    </delete>
+
+    <delete id="deleteMoreByArrayOne">
+
+        DELETE
+        FROM
+        t_emp
+        WHERE
+        eid
+        IN
+        <foreach collection="eids" item="eid" separator="," open="(" close=")">
+            #{eid}
+        </foreach>
+
+    </delete>
+
+    <select id="getEmpByChoose" resultType="Emp">
+
+        SELECT
+        *
+        FROM
+        t_emp
+        <where>
+            <choose>
+                <when test="empName != null and empName != ''">
+                    emp_name = #{empName}
+                </when>
+                <when test="age != null and age != ''">
+                    age = #{age}
+                </when>
+                <when test="sex != null and sex != ''">
+                    sex = #{sex}
+                </when>
+                <when test="email != null and email != ''">
+                    email = #{email}
+                </when>
+                <otherwise>
+                    did = 1
+                </otherwise>
+            </choose>
+            
+        </where>
+
+    </select>
+
     <select id="getEmpByConditionOne" resultType="Emp">
         SELECT
         *
@@ -46,9 +110,11 @@
         </where>
     </select>
 
+    <sql id="empColumns">eid, emp_name, age, sex, email</sql>
+
     <select id="getEmpByCondition" resultType="Emp">
         SELECT
-        *
+        <include refid="empColumns"></include>
         FROM
         t_emp
         <trim prefix="where" suffixOverrides="and|or">
