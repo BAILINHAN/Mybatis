@@ -10,6 +10,10 @@
     <typeAliases>
         <package name="com.solo.mybatis.bean"/>
     </typeAliases>
+    
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor"></plugin>
+    </plugins>
 
     <!-- 设置连接数据库的信息 -->
     <environments default="development">
